@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const userRouter = require("./users/userRouter")
+const postRouter = require("./posts/postRouter")
 const server = express();
 
 server.get('/', (req, res) => {
@@ -10,6 +11,7 @@ server.get('/', (req, res) => {
 server.use(express.json());
 server.use(morgan("dev"));
 server.use("/api/users", userRouter);
+server.use("/api/posts", postRouter);
 server.get("*", (req, res) => {
   res.status(404).json({message: "Not found"});
 });''
@@ -19,5 +21,4 @@ server.use((error, req, res, next) => {
 });
 
 module.exports = server;
-
 
